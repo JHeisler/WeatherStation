@@ -18,7 +18,7 @@ port = 80
 
 s.connect((host,port))
 
-s.recv(1024)
+#s.recv(1024)
 
 def msg():
 
