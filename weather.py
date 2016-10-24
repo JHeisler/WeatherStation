@@ -1,9 +1,8 @@
 #import libraries
 import sys
 import Adafruit_DHT # humidity
-# BMP180/085
+#BMP180/085
 import Adafruit_BMP.BMP085 as BMP085
-import gevent # websocket
 import datetime
 import socket
 
