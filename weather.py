@@ -27,11 +27,11 @@ def msg():
         hum = "{:0.1f}%".format(humidity)
         temp = "{0:0.2f} *C".format(sensorBMP.read_temperature())
         Pressure = "{0:0.2f} Pa".format(sensorBMP.read_pressure())
-        t = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+        ts = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
         s.send(hum)
         s.send(temp)
         s.send(Pressure)
-        s.send(t)
+        s.send(ts)
         print "sent"
 
 
