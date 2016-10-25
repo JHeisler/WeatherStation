@@ -12,9 +12,23 @@ class DataNamespace(BaseNamespace,BroadcastMixin):
     def on_msg(self):
         # unsure how to request from python client
         #self.request['data']
-        self.broadcast_event('doop')
+        #get temp,humidity, pressure,timestamp
 
-
+#take the data and put it in the database
+class DBNamespace():
+    def on_set(self):
+        db.set("Temperature",temp)
+        db.set("Humidity", hum)
+        db.set("Pressure",pres)
+        db.set("Time",ts)
+    
+    # test code
+    # msg is a string passed, gets the fields from the db
+    # page will request this
+    def on_get(self, msg):
+        val = db.get(msg)
+        
+    
 def not_found(start_response):
     start_response('404 Not Found', [])
     return ['<h1>Not Found</h1>']
