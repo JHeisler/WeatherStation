@@ -4,36 +4,31 @@ import Adafruit_DHT # humidity
 #BMP180/085
 import Adafruit_BMP.BMP085 as BMP085
 import datetime
-import socket
+from socketIO_client import SocketIO, BaseNamespace
 
 # define sensors and pins
 sensorDHT = Adafruit_DHT.AM2302
 pin = 23
 sensorBMP = BMP.BMP085()
 
+values = []
 
-s = socket.socket()
-host = socket.gethostname()
-port = 80
+socketIO = SocketIO('localhost', 80, Namespace)
+socketIO.wait(seconds=1)
 
-s.connect((host,port))
+class Namespace(BaseNamespace):
+    def data():
 
-#s.recv(1024)
-
-def msg():
-
-    while 1:
-        humidity = Adafruit_DHT.read_retry(sensorDHT,pin)
-        hum = "{:0.1f}%".format(humidity)
-        temp = "{0:0.2f} *C".format(sensorBMP.read_temperature())
-        Pressure = "{0:0.2f} Pa".format(sensorBMP.read_pressure())
-        ts = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-        s.send(hum)
-        s.send(temp)
-        s.send(Pressure)
-        s.send(ts)
-        print "sent"
+        while 1:
+            humidity = Adafruit_DHT.read_retry(sensorDHT,pin)
+            values[0] = "{:0.1f}%".format(humidity)
+            values[1] = "{0:0.2f} *C".format(sensorBMP.read_temperature())
+            values[2] = "{0:0.2f} Pa".format(sensorBMP.read_pressure())
+            values[3] = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+            
+            #s.send(values) serialize this data?
+            #print "sent"
 
 
-    s.shutdown(0)
-    s.close
+        s.shutdown(0)
+        s.close
