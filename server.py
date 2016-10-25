@@ -13,6 +13,7 @@ class DataNamespace(BaseNamespace, BroadcastMixin):
         # unsure how to request from python client
         #self.request['data']
         #get temp,humidity, pressure,timestamp
+        #timer to get data every 1s
         
     def on_msg(self):
         self.broadcast_event(data)
