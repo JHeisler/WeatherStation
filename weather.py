@@ -5,6 +5,7 @@ import Adafruit_DHT # humidity
 import Adafruit_BMP.BMP085 as BMP085
 import datetime
 from socketIO_client import SocketIO, BaseNamespace
+import pickle
 
 # define sensors and pins
 sensorDHT = Adafruit_DHT.AM2302
@@ -26,8 +27,10 @@ class Namespace(BaseNamespace):
             values[2] = "{0:0.2f} Pa".format(sensorBMP.read_pressure())
             values[3] = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
             
-            #s.send(values) serialize this data?
-            #print "sent"
+            #serialize data to send
+            data = pickle.dump(values)
+            s.send(data) serialize this data?
+            print "sent"
 
 
         s.shutdown(0)
