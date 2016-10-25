@@ -3,12 +3,11 @@ from gevent import monkey; monkey.patch_all()
 from socketio import socketio_manage
 from socketio.server import SocketIOServer
 from socketio.namespace import BaseNamespace
-from socketio.mixins import BroadcastMixin
 import redis
 
 db = redis.StrictRedis('localhost',80,0)
 
-class DataNamespace(BaseNamespace,BroadcastMixin):
+class DataNamespace(BaseNamespace):
     def on_msg(self):
         # unsure how to request from python client
         #self.request['data']
