@@ -3,15 +3,19 @@ from gevent import monkey; monkey.patch_all()
 from socketio import socketio_manage
 from socketio.server import SocketIOServer
 from socketio.namespace import BaseNamespace
+from socketio.mixins import BroadcastMixin
 import redis
 
 db = redis.StrictRedis('localhost',80,0)
 
-class DataNamespace(BaseNamespace):
-    def on_msg(self):
+class DataNamespace(BaseNamespace, BroadcastMixin):
+    def on_data(self):
         # unsure how to request from python client
         #self.request['data']
         #get temp,humidity, pressure,timestamp
+        
+    def on_msg(self):
+        self.broadcast_event(data)
 
 #take the data and put it in the database
 class DBNamespace():
