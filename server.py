@@ -8,29 +8,33 @@ import redis
 
 db = redis.StrictRedis('localhost',80,0)
 
-class DataNamespace(BaseNamespace, BroadcastMixin):
+class GetDataNamespace(BaseNamespace, BroadcastMixin):
     def on_data(self):
         # unsure how to request from python client
         #self.request['data']
         #get temp,humidity, pressure,timestamp
         #timer to get data every 1s
         
-    def on_msg(self):
-        self.broadcast_event(data)
-
-#take the data and put it in the database
-class DBNamespace():
     def on_set(self):
         db.set("Temperature",temp)
         db.set("Humidity", hum)
         db.set("Pressure",pres)
         db.set("Time",ts)
-    
+
     # test code
     # msg is a string passed, gets the fields from the db
     # page will request this
     def on_get(self, msg):
         val = db.get(msg)
+        #msg will be serialized with pickle, need to change this
+        
+#take the data and put it in the database
+class SendDataNamespace():
+    
+    def on_msg(self):
+        self.broadcast_event(data)
+        
+    
         
     
 def not_found(start_response):
@@ -40,6 +44,6 @@ def not_found(start_response):
 
 if __name__ == '__main__':
     print 'Listening on port 8080 and on port 843 (flash policy server)'
-    SocketIOServer(('0.0.0.0', 80), Application(),
+    SocketIOServer(('0.0.0.0', 8080), Application(),
         resource="socket.io", policy_server=True,
-        policy_listener=('0.0.0.0', 10843)).serve_forever()
+        policy_listener=('0.0.0.0', 843)).serve_forever()
