@@ -18,7 +18,7 @@ socketIO = SocketIO('localhost', 80, Namespace)
 socketIO.wait(seconds=1)
 
 class Namespace(BaseNamespace):
-    def data():
+    def data(self):
 
         while 1:
             humidity = Adafruit_DHT.read_retry(sensorDHT,pin)
@@ -29,7 +29,7 @@ class Namespace(BaseNamespace):
             
             #serialize data to send
             data = pickle.dump(values)
-            s.send(data)
+            s.send(data) 
             print "sent"
 
 
