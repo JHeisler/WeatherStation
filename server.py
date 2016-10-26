@@ -6,7 +6,7 @@ from socketio.namespace import BaseNamespace
 from socketio.mixins import BroadcastMixin
 import redis
 
-db = redis.StrictRedis('localhost',80,0)
+db = redis.StrictRedis('localhost',8080,0)
 
 class GetDataNamespace(BaseNamespace, BroadcastMixin):
     def on_data(self):
