@@ -15,7 +15,7 @@ sensorBMP = BMP085.BMP085()
 
 values = []
 
-socketIO = SocketIO('localhost', 80, Namespace)
+socketIO = SocketIO('localhost', 80)
 socketIO.wait(seconds=1)
 
 class Namespace(BaseNamespace):
