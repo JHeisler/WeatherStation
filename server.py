@@ -4,7 +4,7 @@ from socketio import socketio_manage
 from socketio.server import SocketIOServer
 from socketio.namespace import BaseNamespace
 from socketio.mixins import BroadcastMixin
-import redis
+#import redis maybe use another db instead
 import pickle
 
 db = redis.StrictRedis('localhost',8080,0)
@@ -12,15 +12,15 @@ db = redis.StrictRedis('localhost',8080,0)
 class GetDataNamespace(BaseNamespace):
     def on_data(self):
         piData = pickle.load(values)
-        db.set("Temperature",piData[1])
-        db.set("Humidity", piData[0])
-        db.set("Pressure",piData[2])
-        db.set("Time",piData[3])
+        #db.set("Temperature",piData[1])
+        #db.set("Humidity", piData[0])
+        #db.set("Pressure",piData[2])
+        #db.set("Time",piData[3])
 
 class SendDataNamespace(BaseNamespace, BroadcastMixin):
     
     def on_msg(self):
-        self.broadcast_event(db.get("Temperature"))
+        self.broadcast_event(piData)
 
     
 def not_found(start_response):
