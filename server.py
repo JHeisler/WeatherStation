@@ -7,7 +7,7 @@ from socketio.mixins import BroadcastMixin
 #import redis maybe use another db instead
 import pickle
 
-db = redis.StrictRedis('localhost',8080,0)
+#db = redis.StrictRedis('localhost',8080,0)
 
 class GetDataNamespace(BaseNamespace):
     def on_data(self):
