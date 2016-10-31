@@ -1,4 +1,5 @@
 #import libraries
+from gevent import monkey; monkey.patch_all()
 import sys
 import Adafruit_DHT # humidity
 #BMP180/085
@@ -10,7 +11,7 @@ import pickle
 # define sensors and pins
 sensorDHT = Adafruit_DHT.AM2302
 pin = 23
-sensorBMP = BMP.BMP085()
+sensorBMP = BMP085.BMP085()
 
 values = []
 
