@@ -5,37 +5,23 @@ from socketio.server import SocketIOServer
 from socketio.namespace import BaseNamespace
 from socketio.mixins import BroadcastMixin
 import redis
+import pickle
 
 db = redis.StrictRedis('localhost',8080,0)
 
-class GetDataNamespace(BaseNamespace, BroadcastMixin):
+class GetDataNamespace(BaseNamespace):
     def on_data(self):
-        # unsure how to request from python client
-        #self.request['data']
-        #get temp,humidity, pressure,timestamp
-        #timer to get data every 1s
-        
-    def on_set(self):
-        db.set("Temperature",temp)
-        db.set("Humidity", hum)
-        db.set("Pressure",pres)
-        db.set("Time",ts)
+        piData = pickle.load(values)
+        db.set("Temperature",piData[1])
+        db.set("Humidity", piData[0])
+        db.set("Pressure",piData[2])
+        db.set("Time",piData[3])
 
-    # test code
-    # msg is a string passed, gets the fields from the db
-    # page will request this
-    def on_get(self, msg):
-        val = db.get(msg)
-        #msg will be serialized with pickle, need to change this
-        
-#take the data and put it in the database
-class SendDataNamespace():
+class SendDataNamespace(BaseNamespace, BroadcastMixin):
     
     def on_msg(self):
-        self.broadcast_event(data)
-        
-    
-        
+        self.broadcast_event(db.get("Temperature"))
+
     
 def not_found(start_response):
     start_response('404 Not Found', [])
