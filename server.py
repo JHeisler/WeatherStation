@@ -9,18 +9,19 @@ import pickle
 
 #db = redis.StrictRedis('localhost',8080,0)
 
-class GetDataNamespace(BaseNamespace):
+class StoreNamespace(BaseNamespace,BroadcastMixin):
     def on_data(self):
         piData = pickle.load(values)
+        self.broadcast_event(piData)
         #db.set("Temperature",piData[1])
         #db.set("Humidity", piData[0])
         #db.set("Pressure",piData[2])
         #db.set("Time",piData[3])
 
-class SendDataNamespace(BaseNamespace, BroadcastMixin):
+#class GetNamespace(BaseNamespace, BroadcastMixin):
+    #get_data(msg)
     
-    def on_msg(self):
-        self.broadcast_event(piData)
+    #get_live()
 
     
 def not_found(start_response):
