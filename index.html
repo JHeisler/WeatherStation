@@ -15,9 +15,9 @@ $(function() {
     'reconnect': true,
     'reconnection delay': 500,
   });
-  socket.on('msg', function(data) {
-    $("#msg").html(data.fulldata);
-    console.log(data.msg);
+  socket.on('data', function(data) {
+    $("#data").html(data.fulldata);
+    console.log(data.data);
   });
 });
   </script>
