@@ -12,7 +12,7 @@ import pickle
 class StoreNamespace(BaseNamespace,BroadcastMixin):
     def on_data(self):
         piData = pickle.load(values)
-        self.broadcast_event(msg,piData[0]) #test 
+        self.broadcast_event('msg',piData[0]) #test 
         #db.set("Temperature",piData[1])
         #db.set("Humidity", piData[0])
         #db.set("Pressure",piData[2])
