@@ -30,7 +30,7 @@ def data(self):
             
         #serialize data to send
         data = pickle.dump(values)
-        s.emit(data) 
+        s.emit('data',data) 
         print "sent"
 
 
