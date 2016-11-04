@@ -16,8 +16,6 @@ sensorBMP = BMP085.BMP085()
 values = []
 
 s = SocketIO('localhost/Store', 8080)
-s.wait(seconds=1)
-
 
 while 1:
     humidity = Adafruit_DHT.read_retry(sensorDHT,pin)
