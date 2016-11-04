@@ -30,7 +30,7 @@ class Namespace(BaseNamespace):
             
             #serialize data to send
             data = pickle.dump(values)
-            s.send(data) 
+            s.emit(data) 
             print "sent"
 
 
