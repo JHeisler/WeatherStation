@@ -8,6 +8,7 @@ from socketio.mixins import BroadcastMixin
 import pickle
 import time
 connected = 0
+piData[]=null
 #db = redis.StrictRedis('localhost',8080,0)
  
 class StoreNamespace(BaseNamespace,BroadcastMixin):
