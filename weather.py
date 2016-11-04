@@ -27,10 +27,10 @@ def data(self):
         values[1] = "{0:0.2f} *C".format(sensorBMP.read_temperature())
         values[2] = "{0:0.2f} Pa".format(sensorBMP.read_pressure())
         values[3] = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-            
+        print values[3]
         #serialize data to send
         data = pickle.dump(values)
-        s.emit('data',data) 
+        s.emit('data',data)
         print "sent"
 
 
