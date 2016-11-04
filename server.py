@@ -26,7 +26,11 @@ class StoreNamespace(BaseNamespace,BroadcastMixin):
         #db.set("Time",piData[3])
  
 class GetNamespace(BaseNamespace,BroadcastMixin):
-    #def on_msg
+    def recv_connect(self):
+        print "GetNamespace connected"
+    
+    def on_msg(self):
+        self.broadcast_event('msg2',piData[1])
 
 # You need the application class to set up the namespaces
 # weather.py will connect to /Store
