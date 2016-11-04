@@ -25,6 +25,9 @@ class StoreNamespace(BaseNamespace,BroadcastMixin):
         #db.set("Pressure",piData[2])
         #db.set("Time",piData[3])
  
+class GetNamespace(BaseNamespace,BroadcastMixin):
+    #def on_msg
+
 # You need the application class to set up the namespaces
 # weather.py will connect to /Store
 # html page will connect to /Get
