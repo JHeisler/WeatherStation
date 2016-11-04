@@ -43,7 +43,7 @@ class Application(object):
         if path.startswith("socket.io"):
             socketio_manage(environ, {
                 '/Store': StoreNameSpace,
-                '/Get': GetNameSpace,
+                '/Get': GetNameSpace})
         else:
             return not_found(start_response)
  
