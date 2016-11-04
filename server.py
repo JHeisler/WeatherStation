@@ -1,11 +1,12 @@
 from gevent import monkey; monkey.patch_all()
-import time
+
 from socketio import socketio_manage
 from socketio.server import SocketIOServer
 from socketio.namespace import BaseNamespace
 from socketio.mixins import BroadcastMixin
 #import redis maybe use another db instead
 import pickle
+import time
 connected = false
 #db = redis.StrictRedis('localhost',8080,0)
  
