@@ -5,7 +5,7 @@ import Adafruit_DHT # humidity
 #BMP180/085
 import Adafruit_BMP.BMP085 as BMP085
 import datetime
-from socketIO_client import SocketIO, BaseNamespace
+from socketIO_client import SocketIO
 import pickle
 
 # define sensors and pins
