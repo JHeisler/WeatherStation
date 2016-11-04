@@ -17,12 +17,6 @@ class StoreNamespace(BaseNamespace,BroadcastMixin):
         #db.set("Humidity", piData[0])
         #db.set("Pressure",piData[2])
         #db.set("Time",piData[3])
-
-#class GetNamespace(BaseNamespace, BroadcastMixin):
-    #get_data(msg)
-    
-    #get_live()
-
     
 def not_found(start_response):
     start_response('404 Not Found', [])
