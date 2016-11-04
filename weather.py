@@ -15,8 +15,8 @@ sensorBMP = BMP085.BMP085()
 
 values = []
 
-socketIO = SocketIO('localhost/Store', 8080)
-socketIO.wait(seconds=1)
+s = SocketIO('localhost/Store', 8080)
+s.wait(seconds=1)
 
 
 def data(self):
