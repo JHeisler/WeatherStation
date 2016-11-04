@@ -11,7 +11,7 @@ $(function() {
   WEB_SOCKET_DEBUG = true;
   console.log("Connecting to websocket");
   // Socket.io specific code
-  var socket = io.connect('10.0.1.16:8080/', {
+  var socket = io.connect('10.0.1.16:8080/Get', {
     'reconnect': true,
     'reconnection delay': 500,
   });
