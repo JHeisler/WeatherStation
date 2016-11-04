@@ -7,7 +7,7 @@ from socketio.mixins import BroadcastMixin
 #import redis maybe use another db instead
 import pickle
 import time
-connected = false
+connected = 0
 #db = redis.StrictRedis('localhost',8080,0)
  
 class StoreNamespace(BaseNamespace,BroadcastMixin):
@@ -29,14 +29,14 @@ class StoreNamespace(BaseNamespace,BroadcastMixin):
 class GetNamespace(BaseNamespace,BroadcastMixin):
     def recv_connect(self):
         print "GetNamespace connected"
-        connected = true
-        while(connected):
+        connected = 1
+        while(connected == 1):
             self.broadcast_event('msg2',piData[1])
             time.sleep(5)
      
     def __del__(self):
         print "socket disconnected"
-        connected = false
+        connected = 0
 
 # You need the application class to set up the namespaces
 # weather.py will connect to /Store
