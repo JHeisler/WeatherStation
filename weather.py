@@ -21,9 +21,9 @@ s.wait(seconds=1)
 
 while 1:
     humidity = Adafruit_DHT.read_retry(sensorDHT,pin)
-    values[0] = "{:0.1f}%".format(humidity)
-    values[1] = "{0:0.2f} *C".format(sensorBMP.read_temperature())
-    values[2] = "{0:0.2f} Pa".format(sensorBMP.read_pressure())
+    values[0] = humidity
+    values[1] = sensorBMP.read_temperature()
+    values[2] = sensorBMP.read_pressure()
     values[3] = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
     print values[3]
     #serialize data to send
