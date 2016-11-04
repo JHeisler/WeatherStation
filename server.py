@@ -1,12 +1,12 @@
 from gevent import monkey; monkey.patch_all()
- 
+import time
 from socketio import socketio_manage
 from socketio.server import SocketIOServer
 from socketio.namespace import BaseNamespace
 from socketio.mixins import BroadcastMixin
 #import redis maybe use another db instead
 import pickle
- 
+connected = false
 #db = redis.StrictRedis('localhost',8080,0)
  
 class StoreNamespace(BaseNamespace,BroadcastMixin):
@@ -28,9 +28,14 @@ class StoreNamespace(BaseNamespace,BroadcastMixin):
 class GetNamespace(BaseNamespace,BroadcastMixin):
     def recv_connect(self):
         print "GetNamespace connected"
-    
-    def on_msg(self):
-        self.broadcast_event('msg2',piData[1])
+        connected = true
+        while(connected):
+            self.broadcast_event('msg2',piData[1])
+            time.sleep(5)
+     
+     def __del__(self):
+         print "socket disconnected"
+         connected = false
 
 # You need the application class to set up the namespaces
 # weather.py will connect to /Store
