@@ -33,9 +33,9 @@ class GetNamespace(BaseNamespace,BroadcastMixin):
             self.broadcast_event('msg2',piData[1])
             time.sleep(5)
      
-     def __del__(self):
-         print "socket disconnected"
-         connected = false
+    def __del__(self):
+        print "socket disconnected"
+        connected = false
 
 # You need the application class to set up the namespaces
 # weather.py will connect to /Store
