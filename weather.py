@@ -7,12 +7,13 @@ import Adafruit_BMP.BMP085 as BMP085
 import datetime
 from socketIO_client import SocketIO
 import pickle
+import time
 import logging
 
 logging.basicConfig()
 # define sensors and pins
-sensorDHT = Adafruit_DHT.AM2302
-pin = 23
+sensorDHT = Adafruit_DHT.DHT22
+pin = 26
 sensorBMP = BMP085.BMP085()
 
 values = [0,0,0,0]
@@ -20,17 +21,16 @@ values = [0,0,0,0]
 s = SocketIO('localhost/Store', 8080)
 
 while 1:
-    humidity = Adafruit_DHT.read_retry(sensorDHT,pin)
-    values[0] = humidity
+    values[0] = Adafruit_DHT.read_retry(sensorDHT,pin)
     values[1] = sensorBMP.read_temperature()
     values[2] = sensorBMP.read_pressure()
     values[3] = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-    print values[3]
+    print values[0]
     #serialize data to send
     data = pickle.dump(values)
     s.emit('data',data)
     print "sent"
-
+    time.sleep(5)
 
 s.shutdown(0)
 s.close
