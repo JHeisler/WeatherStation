@@ -7,8 +7,6 @@ import datetime
 import pickle
 import socket
 
-port = 443
-
 # define sensors and pins
 sensorDHT = Adafruit_DHT.DHT22
 pin = 26
@@ -16,9 +14,9 @@ sensorBMP = BMP085.BMP085()
 
 values = [0,0,0,0]
 
+port = 443
 s = socket.socket()
 s.connect(('localhost',port))
-
 
 
 while 1:
