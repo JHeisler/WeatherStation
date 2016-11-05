@@ -30,7 +30,6 @@ while 1:
     data = pickle.dump(values)
     s.emit('data',data)
     print "sent"
-    time.sleep(5)
 
 s.shutdown(0)
 s.close
