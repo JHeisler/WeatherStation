@@ -42,7 +42,7 @@ def request_handler(request_socket):
         print 'e', ex,
 
 def simple_tcp_server():
-    tcp_server = SocketServer.TCPServer(("localhost", 8080),
+    tcp_server = SocketServer.TCPServer(("localhost", 443),
                                         RequestHandlerClass=None,
                                         bind_and_activate=True)
 
