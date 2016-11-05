@@ -2,19 +2,19 @@ import sys
 import SocketServer
 import pickle
 from mysql.connector import MySQLConnection, Error
-from python_mysql_dbconfig import read_db_config
 
 data2 = [0,0,0,0]
 
-def insert_data(data): 
+def insert_data(data):
     query = "INSERT INTO Weather(Humidity,Temperature,Pressure,DTime) " \
             "VALUES(%s,%s,%s,%s)"
     args = (data[0], data[1],data[2],data[3])
 
     try:
-        db_config = read_db_config()
-        conn = MySQLConnection(**db_config)
-
+        conn = mysql.connector.connect(host='localhost',
+                                       database='weather',
+                                       user='root',
+                                       password='test')
         cursor = conn.cursor()
         cursor.execute(query, args)
 
