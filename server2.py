@@ -17,7 +17,8 @@ def insert_data(data):
                                        password='test')
         cursor = conn.cursor()
         cursor.execute(query, args)
-
+        print "db test"
+        
         if cursor.lastrowid:
             print('last insert id', cursor.lastrowid)
         else:
@@ -33,6 +34,7 @@ def insert_data(data):
 
 def request_handler(request_socket):
     try:
+        print "test"
         request_msg = request_socket.recv(1024)
         data2 = pickle.load(request_msg)
         insert_data(data2)
@@ -50,9 +52,10 @@ def simple_tcp_server():
         request_socket, address_port_tuple = tcp_server.get_request()
         print "Connection from: %s" % str(address_port_tuple)
 
+        # nothing going to request handler
         request_handler(request_socket)
         # shutdown request socket and close it
-        tcp_server.shutdown_request(request_socket)
+        #tcp_server.shutdown_request(request_socket)
 
 if __name__ == "__main__":
     simple_tcp_server()
