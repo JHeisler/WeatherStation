@@ -18,7 +18,7 @@ sensorBMP = BMP085.BMP085()
 
 values = [0,0,0,0]
 
-s = SocketIO('localhost/Store', 8080)
+s = SocketIO('localhost/', 8080)
 
 while 1:
     values[0] = Adafruit_DHT.read_retry(sensorDHT,pin)
