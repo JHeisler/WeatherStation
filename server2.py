@@ -17,7 +17,7 @@ def insert_data(data):
                                        password='test')
         cursor = conn.cursor()
         cursor.execute(query, args)
-        print "db test"
+        print("db test")
         
         if cursor.lastrowid:
             print('last insert id', cursor.lastrowid)
@@ -34,7 +34,7 @@ def insert_data(data):
 
 def request_handler(request_socket):
     try:
-        print "test"
+        print("test")
         request_msg = request_socket.recv(1024)
         data2 = pickle.load(request_msg)
         insert_data(data2)
