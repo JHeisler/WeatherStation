@@ -7,6 +7,10 @@ from socketio.mixins import BroadcastMixin
 #import redis maybe use another db instead
 import pickle
 import time
+import logging
+
+logging.basicConfig()
+
 connected = 0
 piData = []
 #db = redis.StrictRedis('localhost',8080,0)
