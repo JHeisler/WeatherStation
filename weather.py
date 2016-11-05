@@ -7,13 +7,15 @@ import Adafruit_BMP.BMP085 as BMP085
 import datetime
 from socketIO_client import SocketIO
 import pickle
+import logging
 
+logging.basicConfig()
 # define sensors and pins
 sensorDHT = Adafruit_DHT.AM2302
 pin = 23
 sensorBMP = BMP085.BMP085()
 
-values = []
+values = [0,0,0,0]
 
 s = SocketIO('localhost/Store', 8080)
 
