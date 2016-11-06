@@ -14,15 +14,34 @@ $(function() {
   var socket = io.connect('10.0.1.6:8080/Get', {
     'reconnect': true,
     'reconnection delay': 500,
+  }); 
+  $("#status").html("Connecting");
+  socket.on('disconnect', function() {
+    var msg = "Disconnected";
+    $("#status").html(msg);
+  });
+    socket.on('error', function() {
+    var msg = "Connection failed";
+    $("#status").html(msg);
+  });
+  socket.on('connect', function() {
+    var msg = "Connected";
+    $("#status").html(msg);
   });
   socket.on('msg2', function(data) {
-    $("#msg2").html(data);
+    var parsedData = JSON.parse(data);
+    var display = "Humidity: " + parsedData[0] + "<br>Temperature: " + parsedData[1] + "<br>Pressure: " + parsedData[2] +
+	"<br>Date Time = " + parsedData[3];
+    $("#msg2").html(display);
     console.log(data);
   });
 });
   </script>
   </head>
 <body>
-  <div id="msg2"></div>
+  <h2>Server Status</h2>
+  	<div id="status"></div>
+  <h2>Weather Data</h2>
+  	<div id="msg2"></div>
 </body>
 </html>
