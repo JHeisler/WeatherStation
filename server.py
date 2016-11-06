@@ -19,14 +19,13 @@ class StoreNamespace(BaseNamespace,BroadcastMixin):
     def recv_connect(self):
         print "StoreNamespace connected"
  
-    def on_data(self, msg): # self is the socket, msg is the received data
+    #self is the socket you received on (From weather.py), msg is recieved data
+    def on_data(self, msg):
         print "received: " + msg
         #print msg
         global piData
         piData = msg
  
-        #self is the socket you received on (From weather.py)
-        #self.broadcast_event('msg',piData[0]) #test
         #db.set("Temperature",piData[1])
         #db.set("Humidity", piData[0])
         #db.set("Pressure",piData[2])
