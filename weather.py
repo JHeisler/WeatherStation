@@ -1,5 +1,4 @@
 #import libraries
-from gevent import monkey; monkey.patch_all()
 import sys
 import Adafruit_DHT
 #BMP180/085
@@ -21,11 +20,23 @@ values = [0,0,0,0]
 s = SocketIO('localhost:8080')
 
 while 1:
-	humidity, temp = Adafruit_DHT.read_retry(sensorDHT,pin)
-	values[0] = '{0:0.1f}'.format(humidity) #send humidty from dht
-	values[1] = '{0:0.2f}'.format(sensorBMP.read_temperature()) #bmp temp
-	values[2] = '{0:0.2f}'.format(sensorBMP.read_pressure())
-	values[3] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+	# DHT try/catch
+	try:
+		humidity, temp = Adafruit_DHT.read_retry(sensorDHT,pin)
+		values[0] = '{0:0.1f}'.format(humidity) #send humidty from dht
+	except Exception as e:
+		values[0] = 'DHT sensor error'
+		print(e)
+		
+	# BMP try/catch
+	try:
+		values[1] = '{0:0.2f}'.format(sensorBMP.read_temperature()) #bmp temp
+		values[2] = '{0:0.2f}'.format(sensorBMP.read_pressure())
+		values[3] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+	except Excetion as e2:
+		values[1] = 'BMP sensor error'
+		print(e2)
+		
 	#serialize data to send
 	data = json.dumps(values)
 	s.emit('data',data)
