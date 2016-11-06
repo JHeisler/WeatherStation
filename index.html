@@ -16,8 +16,8 @@ $(function() {
     'reconnection delay': 500,
   });
   socket.on('msg2', function(data) {
-    $("#msg2").html(data.fulldata);
-    console.log(data.msg2);
+    $("#msg2").html(data);
+    console.log(data);
   });
 });
   </script>
