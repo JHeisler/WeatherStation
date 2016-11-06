@@ -4,7 +4,7 @@ from socketio import socketio_manage
 from socketio.server import SocketIOServer
 from socketio.namespace import BaseNamespace
 from socketio.mixins import BroadcastMixin
-#import redis maybe use mysqldb
+#import redis maybe use another db instead
 import logging
 import json
 
@@ -39,7 +39,6 @@ class GetNamespace(BaseNamespace,BroadcastMixin):
         global piData
         while(connected==1):
             self.broadcast_event('msg2', piData)
-            print "Sent data to webpage: " + piData
             time.sleep(5)
 
     def __del__(self):
@@ -47,8 +46,8 @@ class GetNamespace(BaseNamespace,BroadcastMixin):
         connected = 0
 
 # Application class to set up the namespaces
-# weather.py will connect to ''
-# html page will connect to '/Get'
+# weather.py will connect to /Store
+# html page will connect to /Get
 #### Web server to direct incoming connections
 class Application(object):
     def __init__(self):
