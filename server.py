@@ -22,7 +22,6 @@ class StoreNamespace(BaseNamespace,BroadcastMixin):
     #self is the socket you received on (From weather.py), msg is recieved data
     def on_data(self, msg):
         print "received: " + msg
-        #print msg
         global piData
         piData = msg
  
