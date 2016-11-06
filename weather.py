@@ -21,10 +21,10 @@ values = [0,0,0,0]
 s = SocketIO('localhost:8080')
 
 while 1:
-	dht = Adafruit_DHT.read_retry(sensorDHT,pin)
-	values[0] = dht[0]
-	values[1] = sensorBMP.read_temperature()
-	values[2] = sensorBMP.read_pressure()
+	humidity, temp = Adafruit_DHT.read_retry(sensorDHT,pin)
+	values[0] = '{0:0.1f}'.format(humidity) #send humidty from dht
+	values[1] = '{0:0.2f}'.format(sensorBMP.read_temperature()) #bmp temp
+	values[2] = '{0:0.2f}'.format(sensorBMP.read_pressure())
 	values[3] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 	#serialize data to send
 	data = json.dumps(values)
