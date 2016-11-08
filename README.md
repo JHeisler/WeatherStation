@@ -14,6 +14,7 @@ Adafruit dht install
 
 https://github.com/adafruit/Adafruit_Python_DHT
 
+
 Server
 Using apache, index.html replaces their standard index.html and add /static/ to the same folder. 
 
