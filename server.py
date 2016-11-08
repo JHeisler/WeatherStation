@@ -37,7 +37,7 @@ class GetNamespace(BaseNamespace,BroadcastMixin):
         global piData
         while(connected==1):
             self.broadcast_event('msg2', piData)
-            time.sleep(5)
+            time.sleep(2)
 
     def __del__(self):
         print "socket disconnected"
