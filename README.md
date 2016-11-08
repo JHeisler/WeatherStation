@@ -23,4 +23,5 @@ Using apache, index.html replaces their standard index.html and add /static/ to 
 Run on the server, will need to install gevent/socketIO server (look up to see if server is included in gevent)
 
 -pip install gevent-socketio
+
 -Might use redis for database- if so then install redis.
