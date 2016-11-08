@@ -6,7 +6,7 @@ Install the Adafruit libaries and the  python SocketIO client v0.5.6 on Pi.
 
 -"pip install -U socketIO-client==0.5.6"
 
--Adafruit bmp install-https://github.com/adafruit/Adafruit_Python_BMP
+-Adafruit bmp install- https://github.com/adafruit/Adafruit_Python_BMP
 
 -Adafruit dht install- https://github.com/adafruit/Adafruit_Python_DHT
 
