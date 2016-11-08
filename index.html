@@ -58,8 +58,8 @@ $(function() {
   socket.on('msg2', function(data) {
     var parsedData = JSON.parse(data);
     var temp = parsedData[1]
-    var display = "Humidity: " + parsedData[0] + "<br>Temperature: " + parsedData[1] + "<br>Pressure: " + parsedData[2] +
-	"<br>Date Time = " + parsedData[3];
+    var display = "Humidity: " + parsedData[0] + "%" + "<br>Temperature: " + parsedData[1] + "&deg C" + 
+		   "<br>Pressure: " + parsedData[2] + "Pa" + "<br>Date And Time = " + parsedData[3];
     $("#msg2").html(display);
     console.log(data);
 
