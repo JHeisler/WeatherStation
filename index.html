@@ -4,12 +4,15 @@
     <title>Weatherstation Demo</title>
     <script type="text/javascript" src="static/jquery-1.6.1.min.js"></script>
     <script type="text/javascript" src="static/socket.io.js"></script>
+    <script type="text/javascript" src="static/jquery.flot.js"></script>
     <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="static/excanvas.js"></script><![endif]-->
     <script>
 $(function() {
+
   WEB_SOCKET_SWF_LOCATION = "/static/WebSocketMain.swf";
   WEB_SOCKET_DEBUG = true;
   console.log("Connecting to websocket");
+
   // Socket.io specific code
   var socket = io.connect('10.0.1.6:8080/Get', {
     'reconnect': true,
@@ -28,12 +31,43 @@ $(function() {
     var msg = "Connected";
     $("#status").html(msg);
   });
+
+  // Setup plot
+  var options = {
+    series: { shadowSize: 0, color: 'red'}, 
+    yaxis: { min: 0, max: 35 },
+    xaxis: { show: false }
+  };
+
+  // For formatting the plot data
+  var enumerate = function(l) {
+    var res = [];
+    for (var i=0; i<l.length; ++i)
+        res.push([i, l[i]])
+    return res;
+  };
+
+  // Initial plot data is a bunch of 0's
+  var dot = [];
+  for (var i=0; i<300; i++)
+    dot.push(0);
+
+  // Create the inital graph
+  var plot = $.plot($('#graph'), [{data: enumerate(dot)}], options);
+
   socket.on('msg2', function(data) {
     var parsedData = JSON.parse(data);
+    var temp = parsedData[1]
     var display = "Humidity: " + parsedData[0] + "<br>Temperature: " + parsedData[1] + "<br>Pressure: " + parsedData[2] +
 	"<br>Date Time = " + parsedData[3];
     $("#msg2").html(display);
     console.log(data);
+
+    //Plot data
+    dot = dot.slice(1);
+    dot.push(temp);
+    plot.setData([{data: enumerate(dot)}]);
+    plot.draw();
   });
 });
   </script>
@@ -43,5 +77,7 @@ $(function() {
   	<div id="status"></div>
   <h2>Weather Data</h2>
   	<div id="msg2"></div>
+  <h3>Live Graph of Temperature</h3>
+	<div id ="graph" style="width:400px;height:300px"></div>
 </body>
 </html>
