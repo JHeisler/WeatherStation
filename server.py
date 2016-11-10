@@ -9,7 +9,7 @@ import json
 import sqlite3
 
 # db connect and cursor
-conn = sqlite3.connect('example.db')
+conn = sqlite3.connect('weather.db')
 db = conn.cursor()
 
 # error logger
