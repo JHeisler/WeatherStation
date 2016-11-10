@@ -20,7 +20,7 @@ Install the Adafruit libaries and the  python SocketIO client v0.5.6 on Pi.
 
 Runs the server to serve the webpage
 
-Using apache, index.html replaces their standard index.html and add /static/ to the same folder. Currently cannot get 'localhost' to work with the index.html so currently need to change ip to raspberry pi's ip.
+Using apache, index.html replaces their standard index.html and add /static/ to the same folder. 
 
 
 **Server Program**
