@@ -14,7 +14,7 @@ $(function() {
   console.log("Connecting to websocket");
 
   // Socket.io specific code
-  var socket = io.connect('10.0.1.6:8080/Get', {
+  var socket = io.connect(location.hostname + ':8080/Get', {
     'reconnect': true,
     'reconnection delay': 500,
   }); 
