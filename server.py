@@ -16,7 +16,6 @@ db = conn.cursor()
 logging.basicConfig()
 
 connected = 0
-piData = []
  
 # Recieves data from the websocket and stores it in the database
 class StoreNamespace(BaseNamespace,BroadcastMixin):
