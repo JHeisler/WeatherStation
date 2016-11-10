@@ -32,9 +32,15 @@ $(function() {
     $("#status").html(msg);
   });
 
-  // Setup plot
+  // Setup plots
   var options = {
     series: { shadowSize: 0, color: 'purple'}, 
+    yaxis: { min: 0, max: 35 },
+    xaxis: { show: false }
+  };
+
+  var options2 = {
+    series: { shadowSize: 0, color: 'green'}, 
     yaxis: { min: 0, max: 35 },
     xaxis: { show: false }
   };
@@ -47,13 +53,25 @@ $(function() {
     return res;
   };
 
-  // Initial plot data is a bunch of 0's
+  var enumerate2 = function(l) {
+    var res = [];
+    for (var i=0; i<l.length; ++i)
+        res.push([i, l[i]])
+    return res;
+  };
+
+  // Plot data initializes to 0's
   var dot = [];
   for (var i=0; i<300; i++)
     dot.push(0);
 
-  // Create the inital graph
+  var dot2 = [];
+  for (var i=0; i<300; i++)
+    dot2.push(0);
+
+  // Create the inital graphs
   var plot = $.plot($('#graph'), [{data: enumerate(dot)}], options);
+  var plot2 = $.plot($('#graph2'), [{data: enumerate2(dot2)}], options2);
 
   socket.on('msg2', function(data) {
     var parsedData = JSON.parse(data);
@@ -82,8 +100,8 @@ $(function() {
 	<div id ="graph" style="width:400px;height:300px"></div>
   </div>
   <div id="right" style='float:right;height:100%;width:50%;'>
-	  <h2>DB Side </h2>
-	  <div id ="graph" style="width:400px;height:300px"></div>
+	  <h2>Last 24 Hours</h2>
+	  <div id ="graph2" style="width:400px;height:300px"></div>
   </div>
 </body>
 </html>
