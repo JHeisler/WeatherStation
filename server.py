@@ -4,16 +4,21 @@ from socketio import socketio_manage
 from socketio.server import SocketIOServer
 from socketio.namespace import BaseNamespace
 from socketio.mixins import BroadcastMixin
-#import redis maybe use another db instead
 import logging
 import json
+import sqlite3
 
+# db connect and cursor
+conn = sqlite3.connect('example.db')
+db = conn.cursor()
+
+# error logger
 logging.basicConfig()
 
 connected = 0
 piData = []
-#db = redis.StrictRedis('localhost',8080,0)
  
+# Recieves data from the websocket and stores it in the database
 class StoreNamespace(BaseNamespace,BroadcastMixin):
     # Test method to print if weather.py connects
     def recv_connect(self):
@@ -22,14 +27,22 @@ class StoreNamespace(BaseNamespace,BroadcastMixin):
     #self is the socket you received on (From weather.py), msg is recieved data
     def on_data(self, msg):
         print "received: " + msg
-        global piData
+        global piData #serialized data to send to webpage
         piData = msg
- 
-        #db.set("Temperature",piData[1])
-        #db.set("Humidity", piData[0])
-        #db.set("Pressure",piData[2])
-        #db.set("Time",piData[3])
- 
+       
+        ### DB section
+        global parsedData
+        parsedData = json.loads(piData) #deserialize
+        
+        db.execute('''CREATE TABLE weather
+             (date, humidity, temperature, pressure)''')
+        # set DB values
+        db.execute("INSERT INTO humidity (?)", (parsedData[0]))
+        db.execute("INSERT INTO temperature (?)",(parsedData[1]))
+        db.execute("INSERT INTO pressure (?)",(parsedData[2]))
+        db.execute("INSERT INTO date (?)", (parsedData[3]))
+
+# Retrieves data for the webpage, database not implemented yet
 class GetNamespace(BaseNamespace,BroadcastMixin):
     def recv_connect(self):
         print "GetNamespace connected"
@@ -62,12 +75,7 @@ class Application(object):
         else:
             return not_found(start_response)
  
- 
-def not_found(start_response):
-    start_response('404 Not Found', [])
-    return ['<h1>Not Found</h1>']
- 
- 
+
 if __name__ == '__main__':
     print 'Listening on port 8080 and on port 843 (flash policy server)'
     SocketIOServer(('0.0.0.0', 8080), Application(),
