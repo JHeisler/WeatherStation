@@ -38,7 +38,7 @@ class StoreNamespace(BaseNamespace,BroadcastMixin):
         db.execute('''CREATE TABLE if not exists weather
              (humidity, temperature, pressure, date)''')
         # set DB values
-        db.execute("INSERT INTO weather (?,?,?,?)", parsedData)
+        db.execute("INSERT INTO weather VALUES(?,?,?,?)", parsedData)
 
 # Retrieves data for the webpage, database not implemented yet
 class GetNamespace(BaseNamespace,BroadcastMixin):
