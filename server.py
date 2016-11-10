@@ -34,7 +34,8 @@ class StoreNamespace(BaseNamespace,BroadcastMixin):
         global parsedData
         parsedData = json.loads(piData) #deserialize
         
-        db.execute('''CREATE TABLE weather
+        # creates a weather table if there is none
+        db.execute('''CREATE TABLE if not exists weather
              (date, humidity, temperature, pressure)''')
         # set DB values
         db.executemany("INSERT INTO weather humidity (?)", parsedData[0])
