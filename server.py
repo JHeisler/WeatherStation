@@ -16,7 +16,6 @@ db = conn.cursor()
 logging.basicConfig()
 
 connected = 0
-global piData
 
 # Recieves data from the websocket and stores it in the database
 class StoreNamespace(BaseNamespace,BroadcastMixin):
@@ -27,6 +26,7 @@ class StoreNamespace(BaseNamespace,BroadcastMixin):
     #self is the socket you received on (From weather.py), msg is recieved data
     def on_data(self, msg):
         print "received: " + msg
+        global piData
         piData = msg #pidata gets serialized data
        
         ### DB section
@@ -44,6 +44,7 @@ class GetNamespace(BaseNamespace,BroadcastMixin):
     def recv_connect(self):
         print "GetNamespace connected"
         connected = 1
+        global piData
         while(connected==1):
             self.broadcast_event('msg2', piData)
             time.sleep(2)
@@ -63,7 +64,7 @@ class Application(object):
     def __call__(self, environ, start_response):
         path = environ['PATH_INFO'].strip('/') or 'index.html'
  
- 
+
         if path.startswith("socket.io"):
             socketio_manage(environ, {
                 '': StoreNamespace,
