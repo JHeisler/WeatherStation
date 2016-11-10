@@ -34,7 +34,7 @@ $(function() {
 
   // Setup plot
   var options = {
-    series: { shadowSize: 0, color: 'red'}, 
+    series: { shadowSize: 0, color: 'green'}, 
     yaxis: { min: 0, max: 35 },
     xaxis: { show: false }
   };
@@ -73,11 +73,16 @@ $(function() {
   </script>
   </head>
 <body>
-  <h2>Server Status</h2>
+  <div id="left" style='float:left;height:100%;width:50%;'>
+    <h2>Server Status</h2>
   	<div id="status"></div>
-  <h2>Weather Data</h2>
+    <h2>Weather Data</h2>
   	<div id="msg2"></div>
-  <h3>Live Graph of Temperature</h3>
+    <h3>Live Graph of Temperature</h3>
 	<div id ="graph" style="width:400px;height:300px"></div>
+  </div>
+  <div id="right" style='float:right;height:100%;width:40%;'>
+	  <h2>DB Side </h2>
+  </div>
 </body>
 </html>
