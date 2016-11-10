@@ -37,10 +37,10 @@ class StoreNamespace(BaseNamespace,BroadcastMixin):
         db.execute('''CREATE TABLE weather
              (date, humidity, temperature, pressure)''')
         # set DB values
-        db.execute("INSERT INTO humidity (?)", (parsedData[0]))
-        db.execute("INSERT INTO temperature (?)",(parsedData[1]))
-        db.execute("INSERT INTO pressure (?)",(parsedData[2]))
-        db.execute("INSERT INTO date (?)", (parsedData[3]))
+        db.execute("INSERT INTO humidity (?)", parsedData[0])
+        db.execute("INSERT INTO temperature (?)", parsedData[1])
+        db.execute("INSERT INTO pressure (?)", parsedData[2])
+        db.execute("INSERT INTO date (?)", parsedData[3])
 
 # Retrieves data for the webpage, database not implemented yet
 class GetNamespace(BaseNamespace,BroadcastMixin):
