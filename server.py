@@ -16,7 +16,8 @@ db = conn.cursor()
 logging.basicConfig()
 
 connected = 0
- 
+global piData
+
 # Recieves data from the websocket and stores it in the database
 class StoreNamespace(BaseNamespace,BroadcastMixin):
     # Test method to print if weather.py connects
@@ -26,8 +27,7 @@ class StoreNamespace(BaseNamespace,BroadcastMixin):
     #self is the socket you received on (From weather.py), msg is recieved data
     def on_data(self, msg):
         print "received: " + msg
-        global piData #serialized data to send to webpage
-        piData = msg
+        piData = msg #pidata gets serialized data
        
         ### DB section
         global parsedData
@@ -44,7 +44,6 @@ class GetNamespace(BaseNamespace,BroadcastMixin):
     def recv_connect(self):
         print "GetNamespace connected"
         connected = 1
-        global piData
         while(connected==1):
             self.broadcast_event('msg2', piData)
             time.sleep(2)
