@@ -6,7 +6,7 @@
 Takes data from BMP and DHT sensors, sends it to the Server program via websockets along with the date/time.
 
 
-Install the Adafruit libaries and the  python SocketIO client v0.5.6 on Pi.
+Install the Adafruit libaries and the  python SocketIO client v0.5.6 on Pi. 4.7k ohm resistor on the dht
 
 
 -pip install -U socketIO-client==0.5.6
@@ -32,3 +32,4 @@ Run on the server, will need to install gevent/socketIO server (look up to see i
 -pip install gevent-socketio
 
 -Might use redis for database- if so then install redis.
+
