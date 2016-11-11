@@ -64,7 +64,6 @@ class Application(object):
     def __call__(self, environ, start_response):
         path = environ['PATH_INFO'].strip('/') or 'index.html'
  
-
         if path.startswith("socket.io"):
             socketio_manage(environ, {
                 '': StoreNamespace,
