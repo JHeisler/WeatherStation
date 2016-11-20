@@ -23,7 +23,8 @@ Runs the server to serve the webpage
 
 Using apache, index.html replaces their standard index.html and add /static/ to the same folder. 
 
-Install gevent-SocketIO::
+
+Install gevent-SocketIO: :
   git clone git://github.com/abourget/gevent-socketio.git
   cd gevent-socketio
   python setup.py install
