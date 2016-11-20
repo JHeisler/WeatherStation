@@ -25,11 +25,12 @@ Using apache, index.html replaces their standard index.html and add /static/ to 
 
 
 Install gevent-SocketIO::
-'''
+```
   git clone git://github.com/abourget/gevent-socketio.git
   cd gevent-socketio
   python setup.py install
-'''
+```
+
 **Server Program**
 
 Will take data from the client's sensors and then send that data to the webpage that is served by the server.
