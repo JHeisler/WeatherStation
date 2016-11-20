@@ -16,12 +16,17 @@ Install the Adafruit libaries and the  python SocketIO client v0.5.6 on Pi. 4.7k
 -Adafruit dht install- https://github.com/adafruit/Adafruit_Python_DHT
 
 
+
 **Server**
 
 Runs the server to serve the webpage
 
 Using apache, index.html replaces their standard index.html and add /static/ to the same folder. 
 
+Install gevent-SocketIO::
+  git clone git://github.com/abourget/gevent-socketio.git
+  cd gevent-socketio
+  python setup.py install
 
 **Server Program**
 
