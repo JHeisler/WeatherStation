@@ -1,6 +1,11 @@
 # WeatherStation
 **Cyberphysical Systems Project**
 
+
+Run both the client and server apps using sudo
+
+
+
 **Client Program**
 
 Takes data from BMP and DHT sensors, sends it to the Server program via websockets along with the date/time.
